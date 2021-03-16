@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Contato;
-import serviços.ContatoServico;
+import services.ContatoServico;
 
 
 
-@WebServlet({ "/adicionarcontato", "/editarcontato", "/listarcontato", "/buscarcontato", "/removercontato" })
+@WebServlet({ "/adicionarcontato", "/editarcontato", "/listarcontatos", "/buscarcontato", "/removercontato" })
 public class ContatoServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	
@@ -28,7 +28,7 @@ public class ContatoServlet extends HttpServlet{
 	// atende o método HTTP GET
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if (request.getServletPath().equals("/listarcontato")) {
+		if (request.getServletPath().equals("/listarcontatos")) {
 			listaDeContatos(request, response);
 		} else if (request.getServletPath().equals("/buscarcontato")) {
 			localizarContato(request, response);

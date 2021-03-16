@@ -36,15 +36,15 @@ public class CRUDdao extends DAOclass{
 			System.err.println("Não consegue criar a conexão!");
 			throw new RuntimeException();
 		}
-		querysql = "select * from contato where id_contato = ?";
-		pstmt = conn.prepareStatement(querysql);
-		pstmt.setLong(1, idC);
+			
 		
 		try {
+			querysql = "select * from contato where id_contato = ?";
+			pstmt = conn.prepareStatement(querysql);
+			pstmt.setLong(1, idC);
 			respostaSQL = pstmt.executeQuery();
 			if(respostaSQL.next()) {
-				Contato.getDataFromDB(respostaSQL.getObject(5));
-				resultado = new Contato(respostaSQL.getLong(1),respostaSQL.getString(2),respostaSQL.getString(3),respostaSQL.getString(4),Contato.converterSQLdateToPeriod((Date) respostaSQL.getObject(5)), respostaSQL.getString(6), respostaSQL.getString(7));
+				resultado = new Contato(respostaSQL.getLong(1),respostaSQL.getString(2),respostaSQL.getString(3),respostaSQL.getString(4),(Date)(respostaSQL.getDate(5)), respostaSQL.getString(6), respostaSQL.getString(7));
 			}else {
 				System.out.println("Tabela está vazia!");
 			}
@@ -92,18 +92,21 @@ public class CRUDdao extends DAOclass{
 		pstmt = conn.prepareStatement(querysql);
 		
 		try {
-			respostaSQL = pstmt.executeQuery();
-			while(respostaSQL.next()) {
-				tempContato.preencherContato(respostaSQL.getLong(1),respostaSQL.getString(2),respostaSQL.getString(3),respostaSQL.getString(4),Contato.converterSQLdateToPeriod((Date) respostaSQL.getObject(5)),respostaSQL.getString(6),respostaSQL.getString(7));
-				resultado.add(tempContato);
-				tempContato.limparContato();
-			}			
+			respostaSQL = pstmt.executeQuery();			
 		}catch(SQLException e) {
 			System.err.println("Erro ao receber a Query!");
-		}finally {
 			super.endConnection(conn);
 			conn = null;
-		}		
+			return null;
+		}
+		
+		while(respostaSQL.next()) {				
+			tempContato.preencherContato(respostaSQL.getLong(1),respostaSQL.getString(2),respostaSQL.getString(3),respostaSQL.getString(4),(Date)respostaSQL.getDate(5),respostaSQL.getString(6),respostaSQL.getString(7));
+			resultado.add(tempContato);
+			tempContato.limparContato();
+		}
+		super.endConnection(conn);
+		conn = null;		
 		return resultado;
 	}
 	
@@ -138,9 +141,9 @@ public class CRUDdao extends DAOclass{
 		pstmt.setString(1, contato.getNome());
 		pstmt.setString(2, contato.getSobrenome());
 		pstmt.setString(3, contato.getCpf());
-		pstmt.setObject(4, Contato.converterPeriodToSQLdate(contato.getDt_nascimento()));
+		pstmt.setDate(4, (Date)contato.getDt_nascimento());
 		pstmt.setString(5, contato.getEmail());
-		pstmt.setString(5, contato.getTelefone());
+		pstmt.setString(6, contato.getTelefone());
 		try {
 			pstmt.executeUpdate();
 			System.out.println("Inserção bem sucedida!");
@@ -183,7 +186,7 @@ public class CRUDdao extends DAOclass{
 		pstmt.setString(1, contato.getNome());
 		pstmt.setString(2, contato.getSobrenome());
 		pstmt.setString(3, contato.getCpf());
-		pstmt.setObject(4, Contato.converterPeriodToSQLdate(contato.getDt_nascimento()));
+		pstmt.setDate(4, (Date)contato.getDt_nascimento());
 		
 		pstmt.setString(5, contato.getEmail());
 		pstmt.setString(6, contato.getTelefone());
@@ -373,37 +376,72 @@ public class CRUDdao extends DAOclass{
 			conn = null;
 		}
 	}
-	/*
+	
 	//Login
-		public void loginUsuario(String login, String senha) throws SQLException {
-			ResultSet sqlResult=null;
-			conn = super.getConnection();
-			querysql = "select * from usuario where login = ? and senha = ?";
+	public boolean loginUsuario(String login, String senha) throws SQLException {
+		ResultSet sqlResult=null;
+		conn = super.getConnection();
+		querysql = "select * from usuario where login = ?";
+		pstmt = conn.prepareStatement(querysql);
+		pstmt.setString(1, login);
+		pstmt.setString(2, senha);
+		boolean return_bool= Boolean.FALSE;
+		
+		try {
+			conn = super.getConnection();				
+			querysql = "select * from usuario where login = ?";
 			pstmt = conn.prepareStatement(querysql);
 			pstmt.setString(1, login);
-			pstmt.setString(2, senha);
+			sqlResult = pstmt.executeQuery();				
+			if(sqlResult.next()) {				
 			
-			
-			try {
-				sqlResult = pstmt.executeQuery();
-				
-				if( ) {
-					
-				}
-				System.out.println("Atualização bem sucedida!");
-			}catch(SQLException e) {
-				System.err.println("Erro na operação de atualização!");
+				if(senha.compareTo(sqlResult.getString("senha")) == 0) {
+					return_bool = Boolean.TRUE;
+				}else {
+					System.out.println("A senha não confere!");
+					return_bool = Boolean.FALSE;
+				}						
+			}else {					
+				System.out.println("O login não confere!");
+				return_bool = Boolean.FALSE;
 			}
-			
-			try {
-				pstmt.executeUpdate();
-				System.out.println("Atualização bem sucedida!");
-			}catch(SQLException e) {
-				System.err.println("Erro na operação de atualização!");
-			}finally {
-				super.endConnection(conn);
-				conn = null;
-			}
+			System.out.println("Atualização bem sucedida!");				
+		}catch(SQLException e) {
+			System.err.println("Erro na operação de Login!");
+		}finally {
+			super.endConnection(conn);
+			conn = null;
 		}
-	*/
+		return return_bool;
+	}
+	
+	//Busca por EMAIL
+	public Usuario buscaUsuarioEmail(String login) throws SQLException {
+		Usuario resultado = null;
+		ResultSet respostaSQL = null;
+		
+		conn = super.getConnection();
+		if(conn == null) {
+			System.err.println("Não consegue criar a conexão!");
+			throw new RuntimeException();
+		}
+		querysql = "select * from usuario where login = ?";
+		pstmt = conn.prepareStatement(querysql);
+		pstmt.setString(1, login);
+		
+		try {
+			respostaSQL = pstmt.executeQuery();
+			if(respostaSQL.next()) {
+				resultado = new Usuario(respostaSQL.getLong(1),respostaSQL.getString(2),respostaSQL.getString(3));
+			}else {
+				System.out.println("O usuário não existe!");
+			}
+		}catch(SQLException e) {
+			System.err.println("Erro ao receber a Query!");
+		}finally {
+			super.endConnection(conn);
+			conn = null;
+		}		
+		return resultado;
+	}
 }

@@ -1,8 +1,6 @@
 package model;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.Period;
+import java.time.LocalDate;
 import java.sql.Date;
 
 public class Contato {
@@ -11,13 +9,13 @@ public class Contato {
 	private String sobrenome;
 	private String cpf;
 	private String email;
-	private Period dt_nascimento = Period.of(0, 0, 0);
+	private Date dt_nascimento;
 	private String telefone;
 			
 	public Contato() {
 		super();
 	}	
-	public Contato(long id_contato, String nome, String sobrenome, String cpf, Period dt_nascimento, String email, String telefone) {
+	public Contato(long id_contato, String nome, String sobrenome, String cpf, Date dt_nascimento, String email, String telefone) {
 		super();
 		this.id_contato = id_contato;
 		this.nome = nome;
@@ -57,14 +55,15 @@ public class Contato {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	public Period getDt_nascimento() {
+	public Date getDt_nascimento() {
 		return dt_nascimento;
 	}
 	public void setDt_nascimentoYMD(int ano, int mes, int dia) {
-		this.dt_nascimento = Period.of(ano, mes, dia);
+		LocalDate o = LocalDate.of(ano, mes, dia);
+		this.dt_nascimento = Date.valueOf(o);
 	}
 	
-	public void setDt_nascimento(Period data_YMD) {
+	public void setDt_nascimento(Date data_YMD) {
 		this.dt_nascimento = data_YMD;
 	}
 	public void limparContato() {
@@ -76,7 +75,7 @@ public class Contato {
 		this.email = "";
 		this.telefone="";
 	}
-	public void preencherContato(long id_contato, String nome, String sobrenome, String cpf, Period dt_nascimento, String email,String telefone) {
+	public void preencherContato(long id_contato, String nome, String sobrenome, String cpf, Date dt_nascimento, String email,String telefone) {
 		this.id_contato = id_contato;
 		this.nome = nome;
 		this.sobrenome = sobrenome;
@@ -85,35 +84,8 @@ public class Contato {
 		this.email = email;
 		this.telefone = telefone;
 	}
+		
 	
-	public static String periodToDateFormateString(Period p1) {
-		String texto="";
-		texto+=p1.getYears()+"-"+p1.getMonths()+"-"+p1.getDays();
-		return texto;
-	}
-	
-	public static Date converterPeriodToSQLdate(Period p1) {
-		String texto = periodToDateFormateString(p1);
-		java.util.Date dt_util = null;
-		try {
-			dt_util = new SimpleDateFormat("yyyy-mm-dd").parse(texto);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Date dt_sql = new java.sql.Date(dt_util.getTime());
-		return dt_sql;
-	}
-	
-	public static void getDataFromDB(Object o) {
-		String parser = o.toString();
-		System.out.println(parser);
-	}
-	
-	public static Period converterSQLdateToPeriod(Date d1) {
-		Period p1 = Period.of(d1.getYear(),d1.getMonth(),d1.getDay());		
-		return p1;
-	}
 	
 	@Override
 	protected Contato clone() throws CloneNotSupportedException {
@@ -132,7 +104,5 @@ public class Contato {
 	}
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
-	}
-	
-		
+	}		
 }

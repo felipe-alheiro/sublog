@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Endereco;
-import serviços.EnderecoServico;
+import services.EnderecoServico;
 
 
 
-@WebServlet({ "/adicionarendereco", "/editarendereco", "/listarendereco", "/buscarendereco", "/removerendereco" })
+@WebServlet({ "/adicionarendereco", "/editarendereco", "/listarenderecos", "/buscarendereco", "/removerendereco" })
 public class EnderecoServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	
@@ -42,7 +42,7 @@ public class EnderecoServlet extends HttpServlet{
 	// atende o método HTTP POST
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if (request.getServletPath().equals("/adicionarcontato")) {
+		if (request.getServletPath().equals("/adicionarcontatos")) {
 			gravarEndereco(request, response);
 		} else if (request.getServletPath().equals("/editarcontato")) {
 			editarEndereco(request, response);
