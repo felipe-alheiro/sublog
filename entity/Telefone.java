@@ -1,3 +1,10 @@
+/*
+ * Exercício CRUD Luís
+ * Autor: Felipe Alheiro
+ * Objetivo do projeto : Criar um projeto de CRUD funcional
+ * Objetivo: Declarar a classe Telefone
+ * Questão: Poderia ser uma classe interior de Contato
+ * */
 package entity;
 
 public class Telefone{

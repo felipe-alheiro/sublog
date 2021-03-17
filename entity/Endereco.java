@@ -1,3 +1,10 @@
+/*
+ * Exercício CRUD Luís
+ * Autor: Felipe Alheiro
+ * Objetivo do projeto : Criar um projeto de CRUD funcional
+ * Objetivo: Declarar a classe Endereço
+ * */
+
 package entity;
 
 import java.io.Serializable;

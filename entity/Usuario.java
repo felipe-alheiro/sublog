@@ -1,3 +1,10 @@
+/*
+ * Exercício CRUD Luís
+ * Autor: Felipe Alheiro
+ * Objetivo do projeto : Criar um projeto de CRUD funcional
+ * Objetivo: Declarar a classe Usuário
+ * Nota: Esperando um sistema de login já estou deixando isto pronto. Opcional isso aqui pois não faz parte do exercício
+ * */
 package entity;
 
 import java.io.Serializable;
