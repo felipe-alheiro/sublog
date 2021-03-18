@@ -226,7 +226,7 @@ public class DAOContato extends DAOClass{
 		}catch(SQLException e) {
 			throw new SQLException("Não conseguiu realizar a consulta!");
 		}
-		querysql = "select a.nome,a.sobrenome,a.cpf,a.email,a.dt_nascimento,e.tipo_logradouro,e.complemento,e.logradouro,e.bairro,e.cidade,e.estado,e.pais,t.ddi,t.ddd,t.numero_telefone"
+		querysql = "select a.nome,a.sobrenome,a.cpf,a.email,a.dt_nascimento,e.tipo_logradouro,e.logradouro,e.complemento,e.bairro,e.cidade,e.estado,e.pais,t.ddi,t.ddd,t.numero_telefone"
 				+" from contato a"
 				+" inner join endereco e on e.id_contato_residente = a.id_contato"
 				+" inner join telefone t on t.id_cliente_associado = a.id_contato"
@@ -277,7 +277,7 @@ public class DAOContato extends DAOClass{
 		}catch(SQLException e) {
 			throw new SQLException("Não conseguiu realizar a consulta!");
 		}
-		querysql = "select e.tipo_logradouro,e.complemento,e.logradouro,e.bairro,e.cidade,e.estado,e.pais,e.id_contato_residente"
+		querysql = "select e.tipo_logradouro,e.logradouro,e.complemento,e.bairro,e.cidade,e.estado,e.pais,e.id_contato_residente"
 				+" from endereco e"
 				+ " where id_endereco = ?";
 		try {			
@@ -319,7 +319,7 @@ public class DAOContato extends DAOClass{
 		}catch(SQLException e) {
 			throw new SQLException("Não conseguiu realizar a consulta!");
 		}
-		querysql = "select t.ddi,t.ddd,t.telefone"
+		querysql = "select t.ddi,t.ddd,t.numero_telefone"
 				+" from telefone t"
 				+ " where id_telefone = ?";
 		try {			
@@ -360,7 +360,7 @@ public class DAOContato extends DAOClass{
 		}catch(SQLException e) {
 			throw new SQLException("Não conseguiu realizar a consulta!");
 		}
-		querysql = "select e.id_endereco,e.tipo_logradouro,e.complemento,e.logradouro,e.bairro,e.cidade,e.estado,e.pais,e.id_contato_residente"
+		querysql = "select e.id_endereco,e.tipo_logradouro,e.logradouro,e.complemento,e.bairro,e.cidade,e.estado,e.pais,e.id_contato_residente"
 				+" from endereco e"
 				+ " where id_contato_residente = ?";
 		try {			
@@ -402,7 +402,7 @@ public class DAOContato extends DAOClass{
 		}catch(SQLException e) {
 			throw new SQLException("Não conseguiu realizar a consulta!");
 		}
-		querysql = "select t.ddi,t.ddd,t.telefone"
+		querysql = "select t.id_telefone,t.ddi,t.ddd,t.numero_telefone"
 				+" from telefone t "
 				+ " where id_cliente_associado = ?";
 		try {			

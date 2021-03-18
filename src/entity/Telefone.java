@@ -9,8 +9,8 @@ package entity;
 
 public class Telefone{
 	long id_telefone;
-	String ddd;
 	String ddi;
+	String ddd;
 	String numero_telefone;
 		
 	public Telefone() {
@@ -23,7 +23,7 @@ public class Telefone{
 		this.numero_telefone = numero_telefone;
 	}
 	
-	public Telefone(long id_telefone, String ddd, String ddi, String numero_telefone) {
+	public Telefone(long id_telefone, String ddi, String ddd, String numero_telefone) {
 		super();
 		this.id_telefone = id_telefone;
 		this.ddd = ddd;
@@ -99,7 +99,6 @@ public class Telefone{
 		.append(ddi)
 		.append(numero_telefone)
 		.append(" ]");
-		System.out.println("Lidos: " + str.toString());
 		return str.toString();
 	}
 	

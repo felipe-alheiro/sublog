@@ -25,9 +25,20 @@ public class Main {
 		a.setTelefone(new ArrayList<Telefone>());
 		a.getTelefone().add(new Telefone("55","21","999999999"));
 		a.getTelefone().add(new Telefone("55","21","22266699"));
+		a.getTelefone().add(new Telefone("55","21","972266699"));
 		
+		//teste.apagar(15L);
 		teste.salvar(a);
+		Endereco procurado = teste.buscaPorIdcontatoEndereco(16L);
+		System.out.println(procurado.toString());
+		ArrayList<Telefone> proctel = teste.buscaPorIdcontatoTelefone(16L);
 		
+		System.out.println(procurado.toString());
+		
+		for(Telefone r : proctel) {
+			System.out.println("Tel: "+r.toString());
+		}
+		System.out.println(procurado.toString());		
 		
 		teste.encerrarServico();
 

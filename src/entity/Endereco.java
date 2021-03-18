@@ -208,8 +208,8 @@ public class Endereco implements Serializable,Cloneable{
 	}
 	@Override
 	public String toString() {
-		return "Endereco [tipo_logradouro=" + tipo_logradouro + ", logradouro=" + logradouro + ", complemento="
-				+ complemento + ", bairro=" + bairro + ", cidade=" + cidade + ", estado=" + estado + ", pais=" + pais
+		return "Endereco :" + tipo_logradouro + " " + logradouro + " "
+				+ complemento + " , " + bairro + " , " + cidade + " ," + estado + " ," + pais
 				+ "]";
 	}
 	@Override
