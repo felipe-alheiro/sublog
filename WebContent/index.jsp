@@ -26,20 +26,47 @@
 	  		<form action="addcontato" method="post">
 	  			<div>
 	  				<label for="nome_id">Nome</label>
-	  				<input type="text" class="form-control" name="inputNome" id="nome_id" placeholder="informe o nome" required>
+	  				<input type="text" class="form-control" name="inputNome" id="nome_id" placeholder="informe seu nome" required>
+	  			</div>
+	  			<div>
+	  				<label for="sobrenome_id">Sobrenome</label>
+	  				<input type="text" class="form-control" name="inputSobrenome" id="sobrenome_id" placeholder="informe seu sobrenome" required>
+	  			</div>
+	  			<div>
+	  				<label for="cpf_id">CPF</label>
+	  				<input type="text" class="form-control" name="inputCPF" id="cpf_id" placeholder="informe o cpf" required>
 	  			</div>
 	  			<div>
 	  				<label for="email_id">Email</label>
-	  				<input type="email" class="form-control" name="inputEmail" id="email_id" placeholder="informe o email" required>
+	  				<input type="email" class="form-control" name="inputEmail" id="email_id" placeholder="informe seu email" required>
+	  			</div>
+	  			<div>
+	  				<label for="dtNascimento_id">Data de Nascimento</label>
+	  				<input type="date" class="form-control" name="inputDate" id="date_id" required>
 	  			</div>
 	  			<div>
 	  				<label for="telefone_id">Telefone</label>
+	  				<input type="tel" class="form-control" name="inputddi" id="ddi_id" placeholder="informe o DDI" required>
+	  				<input type="tel" class="form-control" name="inputddd" id="ddd_id" placeholder="informe o DDD" required>
 	  				<input type="tel" class="form-control" name="inputTelefone" id="telefone_id" placeholder="informe o telefone" required>
+	  			</div>
+	  			<div>
+	  				<label for="tipologradouro_id">Tipo de Logradouro</label>
+	  				<input type="text" class="form-control" name="inputTipoLogradouro" id="tipologradouro_id" placeholder="informe o tipo de logradouro" required>
 	  			</div>
 	  			<div>
 	  				<label for="logradouro_id">Logradouro</label>
 	  				<input type="text" class="form-control" name="inputLogradouro" id="logradouro_id" placeholder="informe o logradouro" required>
 	  			</div>
+	  			<div>
+	  				<label for="complemento_id">Complemento</label>
+	  				<input type="text" class="form-control" name="inputComplemento" id="complemento_id" placeholder="informe complementos" required>
+	  			</div>
+	  			<div>
+	  				<label for="bairro_id">Logradouro</label>
+	  				<input type="text" class="form-control" name="inputBairro" id="bairro_id" placeholder="informe o bairro" required>
+	  			</div>
+	  			
 	  			<div>
 	  				<label for="cidade_id">Cidade</label>
 	  				<input type="text" class="form-control" name="inputCidade" id="cidade_id" placeholder="informe o cidade" required>
@@ -48,6 +75,11 @@
 	  				<label for="estado_id">Estado</label>
 	  				<input type="text" class="form-control" name="inputEstado" id="estado_id" placeholder="informe o estado" required>
 	  			</div>
+	  			<div>
+	  				<label for="pais_id">País</label>
+	  				<input type="text" class="form-control" name="inputPais" id="pais_id" placeholder="informe o país" required>
+	  			</div>
+	  			
 	  			<div class="d-grid gap-2 col-6 mx-auto my-2">
 		  			<button type="submit" class="btn btn-dark">Gravar</button>
 	  			</div>
