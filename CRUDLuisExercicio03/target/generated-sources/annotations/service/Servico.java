@@ -22,7 +22,7 @@ public class Servico {
 	public boolean abrirSessao() {				
 		try {
 			//define a persistance unit que vamos trabalhar
-			emf = Persistence.createEntityManagerFactory("sublog-pu");
+			emf = Persistence.createEntityManagerFactory("sublog");
 			// cria a instância / sessão
 			em = emf.createEntityManager();
 			
@@ -43,14 +43,20 @@ public class Servico {
 	}
 	
 	public void abrirTransacao() {		
-		if(emf.isOpen()) {
+		if(emf == null) {
 			if(!abrirSessao())
 				return;
 		}else {
-			if(!em.isOpen()) {
-				em = emf.createEntityManager();
+			if(emf.isOpen()) {
+				if(!abrirSessao())
+					return;
+			}else {
+				if(!em.isOpen()) {
+					em = emf.createEntityManager();
+				}
 			}
 		}
+			
 		transaction = em.getTransaction();
 	}
 	
