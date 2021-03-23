@@ -22,7 +22,7 @@ public class Servico {
 	public boolean abrirSessao() {				
 		try {
 			//define a persistance unit que vamos trabalhar
-			emf = Persistence.createEntityManagerFactory("sublog");
+			emf = Persistence.createEntityManagerFactory("dbsublog");
 			// cria a instância / sessão
 			em = emf.createEntityManager();
 			
