@@ -41,12 +41,12 @@ public class Servico {
 			emf.close();
 	}
 	
-	public void abrirTransacao() {		
+	public void abrirTransacao() {
 		if(emf == null) {
 			if(!abrirSessao())
 				return;
 		}else {
-			if(emf.isOpen()) {
+			if(!emf.isOpen()) {
 				if(!abrirSessao())
 					return;
 			}else {
@@ -54,8 +54,7 @@ public class Servico {
 					em = emf.createEntityManager();
 				}
 			}
-		}
-			
+		}			
 		transaction = em.getTransaction();
 	}
 	
@@ -76,6 +75,31 @@ public class Servico {
 		try {
 			//persistencia no BD
 			em.persist(aluno);
+			//persistÊncia da transação
+			transaction.commit();
+			retorno = Boolean.TRUE;
+		}catch(Exception e) {
+			transaction.rollback();
+			e.printStackTrace();
+			System.err.println("Não conseguiu efetuar a operação!");
+		}finally {
+			fecharSessao();
+		}
+		return retorno;
+	}
+	
+	public boolean inserirAluno(Aluno std) {
+		abrirTransacao();
+		transaction.begin();
+		boolean retorno= Boolean.FALSE;
+		
+		if(std==null) {
+			System.out.println("Parâmetro para aluno está vazio.");
+			return Boolean.TRUE;
+		}		
+		try {
+			//persistencia no BD
+			em.persist(std);
 			//persistÊncia da transação
 			transaction.commit();
 			retorno = Boolean.TRUE;
@@ -116,12 +140,38 @@ public class Servico {
 		return retorno;
 	}
 	
+	public boolean inserirEndereco(Endereco addr) {
+		abrirTransacao();
+		transaction.begin();
+		boolean retorno=false;
+		
+		if(addr == null) {
+			System.out.println("Parâmetro endereço está vazio.");
+			return Boolean.TRUE;
+		}
+		//persistencia no BD
+		
+		//persistÊncia da transação
+		try {
+			em.persist(addr);
+			transaction.commit();
+			retorno = true;
+		}catch(Exception e) {
+			transaction.rollback();
+			e.printStackTrace();
+			System.err.println("Não conseguiu efetuar a operação!");
+		}finally {
+			fecharSessao();
+		}
+		return retorno;
+	}
+	
 	public List<Aluno> listarAlunos() {	
 		abrirTransacao();
 		transaction.begin();
 		List<Aluno> alunos = null;
 		try {
-			Query query  = em.createNativeQuery("select * from alunos");
+			Query query  = em.createNativeQuery("select * from aluno");
 			alunos = query.getResultList();
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -138,10 +188,37 @@ public class Servico {
 		Aluno aluno = null;
 		List<Aluno> alunos = null;
 		try {
-			Query query  = em.createNativeQuery("select * from alunos where id_aluno = ?");
+			Query query  = em.createNativeQuery("select * from aluno where id_aluno = ?");
 			query.setParameter(1,id_buscado);
 			alunos =  query.getResultList();
-			aluno = alunos.get(1);
+			try {
+				aluno = alunos.get(1);
+			}catch(IndexOutOfBoundsException e) {
+				aluno = null;
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.err.println("Não conseguiu efetuar a operação!");
+		}finally {
+			fecharSessao();
+		}			
+		return aluno;
+	}
+	
+	public Aluno buscaAlunoMatricula(String matricula) {	
+		abrirTransacao();
+		transaction.begin();	
+		Aluno aluno = null;
+		List<Aluno> alunos = null;
+		try {
+			Query query  = em.createNativeQuery("select * from aluno where matricula = ?");
+			query.setParameter(1,matricula);
+			alunos =  query.getResultList();
+			try {
+				aluno = alunos.get(1);
+			}catch(IndexOutOfBoundsException e) {
+				aluno = null;
+			}
 		}catch(Exception e) {
 			e.printStackTrace();
 			System.err.println("Não conseguiu efetuar a operação!");
@@ -170,13 +247,18 @@ public class Servico {
 	public Endereco buscaEndereco(long id_buscado) {	
 		abrirTransacao();
 		transaction.begin();
-		List<Endereco>  enderecos = null;
+		List<Endereco> enderecos = null;
 		Endereco endereco = null;
 		try {
 			Query query  = em.createNativeQuery("select * from endereco where id_endereco = ?");
 			query.setParameter(1,id_buscado);
 			enderecos = query.getResultList();
-			endereco = enderecos.get(1);
+			try {
+				endereco = enderecos.get(1);
+			}catch(IndexOutOfBoundsException e) {
+				endereco = null;
+			}
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 			System.err.println("Não conseguiu efetuar a operação!");
@@ -239,7 +321,7 @@ public class Servico {
 		abrirTransacao();
 		transaction.begin();
 		try {
-			Query query  = em.createNativeQuery("updateendereco set logradouro =?, cidade=?,estado=?,pais=? where id_endereco = ?");
+			Query query  = em.createNativeQuery("update endereco set logradouro =?, cidade=?,estado=?,pais=? where id_endereco = ?");
 			query.setParameter(1,endereco.getLogradouro());
 			query.setParameter(1,endereco.getCidade());
 			query.setParameter(1,endereco.getEstado());
