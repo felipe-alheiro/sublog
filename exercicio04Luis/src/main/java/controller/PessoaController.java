@@ -156,6 +156,4 @@ public class PessoaController extends HttpServlet {
 		repository.apagarFuncionario(Long.parseLong(request.getParameter("id")));
 		listarFuncionario(request, response);
 	}
-	
-	
 }

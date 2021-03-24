@@ -29,16 +29,16 @@ public class Cliente extends Pessoa implements Serializable{
 	public Cliente() {
 		super();
 	}
-
-	public Cliente(long id, String cadastro, long id_pessoa) {
-		super();
+	
+	public Cliente(long id_pessoa, String nome, String cpf, String email, Endereco endereco, String cadastro, long id) {
+		super(id_pessoa, nome, cpf, email, endereco);
 		this.id = id;
 		this.cadastro = cadastro;
 		this.id_pessoa = id_pessoa;
 	}
 
-	public Cliente(String cadastro, long id_pessoa) {
-		super();
+	public Cliente(long id_pessoa, String nome, String cpf, String email, Endereco endereco, String cadastro) {
+		super(id_pessoa, nome, cpf, email, endereco);
 		this.cadastro = cadastro;
 		this.id_pessoa = id_pessoa;
 	}
