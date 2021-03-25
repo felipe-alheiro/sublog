@@ -1,8 +1,0 @@
-util\HibernateUtil.class
-entity\Pessoa.class
-application\Principal.class
-controller\PessoaController.class
-entity\Endereco.class
-repository\PessoaRepository.class
-entity\Funcionario.class
-entity\Cliente.class
