@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
 
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
 	<groupId>br.rj.sublog</groupId>
 	<artifactId>projetocrud</artifactId>
 	<version>1.0.0</version>
 	<packaging>war</packaging>
 	
-<!-- FIXME change it to the project's website -->
+	
 	<name>projetocrud Maven Webapp</name>	
 	<url>http://www.example.com</url>
 
@@ -20,7 +21,7 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 
-	<!-- Precisa lembrar sempre de adicionar aqui as dependências que o MAVEN 
+	<!-- Precisa lembrar sempre de adicionar em <dependencies> as dependências que o MAVEN 
 		irá importar do repositório - lembrar de ir no site do maven repository - 
 		lembrar de ir em opções e alterar o buildpath pra usar o jdk e não o jre 
 		- usar o maven + update para atualizar o projeto e executar o maven install 
@@ -51,7 +52,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>5.4.29.Final</version>
+			<version>5.4.30.Final</version>
 		</dependency>
 		<!-- Maven Repository MySQLJ para se comunicar com SGBD de MYQSL-->
 		<dependency>
@@ -89,6 +90,27 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
+		<dependency>
+		    <groupId>javax.xml.bind</groupId>
+		    <artifactId>jaxb-api</artifactId>
+		    <version>2.3.1</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-entitymanager</artifactId>
+		    <version>5.4.30.Final</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-annotations -->
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-annotations</artifactId>
+		    <version>3.5.6-Final</version>
+		</dependency>
+		
 	</dependencies>
 	<build>
 		<finalName>projetocrud</finalName>

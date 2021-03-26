@@ -11,12 +11,13 @@ import org.apache.log4j.Logger;
 
 import entity.Cliente;
 import entity.Funcionario;
+import util.HibernateUtil;
 
 public class PessoaRepository implements Serializable {
 	private static final Logger logger = LogManager.getLogger(PessoaRepository.class);
 	private static final long serialVersionUID = 4479083206522329096L;
-	private EntityManager em=null;
-	private EntityTransaction transaction=null;
+	private EntityManager em;
+	private EntityTransaction transaction;
 
 	public PessoaRepository() {}
 
@@ -25,6 +26,9 @@ public class PessoaRepository implements Serializable {
 		openTransaction();
 	}
 	public EntityManager getEmEntityManager() {
+		if(this.em==null) {
+			this.em = HibernateUtil.getEntitymanager();
+		}
 		if(!transaction.isActive())
 			openTransaction();
 		
