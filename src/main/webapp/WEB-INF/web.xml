@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+    id="WebApp_ID" version="3.1">
+    
+    <description>Exemplo de web.xml para um CRUD básico usando Hibernate, Entity e outras tecnologias em JAVA</description>
+	<display-name>Projeto CRUD</display-name>
+    <session-config>
+        <session-timeout>120</session-timeout>
+    </session-config>
+    <servlet>		
+	    <servlet-name>ProjetoCRUD</servlet-name>
+		<servlet-class>AlunoServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+    	<servlet-name>ProjetoCRUD</servlet-name>
+    	<url-pattern>/*</url-pattern>
+    </servlet-mapping>
+</web-app>
