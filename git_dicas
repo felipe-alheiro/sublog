@@ -1,0 +1,31 @@
+Arquivo de Teste
+Feito 08/04/2021 - teste do curso de GIT
+0 ----- Comandos ------
+1 -------- Comandos para definir usuários --------
+2 $git config --global user.name "nome_usuario"
+3 $git config --global user.email "email_usuario"
+4 -------- Comando para listar ----
+5 $git config user.name
+6 $git config user.email
+7 $git config --list -> vai listar informações
+----------------------------------------
+8 mkdir -> cria diretorios
+9 cd -> muda de diretório na árvore
+---------Iniciar diretório .git ------------
+10 $git init
+11 $ls
+12 $ls-la
+13 $vi ou $vim
+------------------------------------------------
+14 untracked, unmodified, modified, staged
+15 $git status
+16 $git add
+17 $git commit -m "mensagem"
+18 $git log
+19 $git log --decorate
+20 $git log --author="nome_autor"
+21 $git shortlog
+22 $git shortlog -sn
+23 $git log --graph
+24 $git show
+
