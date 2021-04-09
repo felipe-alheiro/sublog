@@ -13,19 +13,36 @@ Feito 08/04/2021 - teste do curso de GIT
 9 cd -> muda de diretório na árvore
 ---------Iniciar diretório .git ------------
 10 $git init
+-> cria a pasta .git e inicia o repositório local
 11 $ls
+->lista o conteúdo da pasta
 12 $ls-la
 13 $vi ou $vim
+-> abre o editor vim
 ------------------------------------------------
 14 untracked, unmodified, modified, staged
-15 $git status
+-> estágios dos arquivos
+15 $git status 
+-> nos mostra o status dos arquivos
 16 $git add
+-> adiciona um elemento a fila de envio
 17 $git commit -m "mensagem"
+-> faz o commit dos elementos staged
 18 $git log
+-> faz o resumo das operações
 19 $git log --decorate
+-> mostra opções adicionais como quantidade de commits, autor, data do commit
 20 $git log --author="nome_autor"
 21 $git shortlog
 22 $git shortlog -sn
 23 $git log --graph
 24 $git show
+---------------------------------------------------
+25 $ssh -T destino
+26 $ssh-keygen -t rsa -b 4096 -C destino
+-> cria o par de chaves publico privada para usar no destino
+27 $git remote add origin destino
+28 $git remote
+29 $git push -u origin destino
+30 $git remote -v
 
